@@ -1,11 +1,14 @@
 const express = require("express")
 const morgan = require("morgan")
 const {NotFoundError} = require("./utils/errors")
+const blogRouter = require("./routes/blog")
 
 const app = express()
 
 app.use(morgan("tiny"))
 app.use(express.json())
+
+app.use("/blog", blogRouter)
 
 app.use((req,res,next)=>{
     return next(new NotFoundError())
